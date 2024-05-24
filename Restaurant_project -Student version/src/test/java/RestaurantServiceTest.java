@@ -75,4 +75,35 @@ class RestaurantServiceTest {
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+    @Test
+    public void orderValue_should_return_correct_total_for_single_item() {
+        RestaurantService service = new RestaurantService();
+        service.addMenuItem(new Item("Pasta",  8));
+
+        List<String> items = Arrays.asList("Pasta");
+        double total = service.getOrderValue(items);
+
+        assertEquals(8, total);
+    }
+
+    @Test
+    public void orderValue_should_return_correct_total_for_multiple_items() {
+        RestaurantService service = new RestaurantService();
+        service.addMenuItem(new Item("Pasta", 8));
+        service.addMenuItem(new Item("Burger", 5));
+
+        List<String> items = Arrays.asList("Pasta", "Burger");
+        double total = service.getOrderValue(items);
+
+        assertEquals(13, total);
+    }
+
+    @Test
+    public void orderValue_should_return_zero_for_no_items() {
+        RestaurantService service = new RestaurantService();
+        List<String> items = Arrays.asList();
+        double total = service.getOrderValue(items);
+
+        assertEquals(0, total);
+    }
 }

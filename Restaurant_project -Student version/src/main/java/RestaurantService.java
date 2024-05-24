@@ -36,4 +36,14 @@ public class RestaurantService {
         return restaurants;
     }
 
+
+    public void addMenuItem(Item item) {
+        menu.put(item.getName(), item);
+    }
+
+    public int getOrderValue(List<String> items) {
+        return items.stream()
+                .mapToInt(item -> menu.get(item).getPrice())
+                .sum();
+    }
 }
